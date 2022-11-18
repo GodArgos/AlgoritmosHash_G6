@@ -2,7 +2,10 @@
 #include<fstream>
 #include<string>
 #include<ctime>
-#include<cmath>
+
+#include "md5.h"
+#include "sha256.h"
+
 using namespace std;
 
 string LeerArchivo(){
@@ -10,6 +13,7 @@ string LeerArchivo(){
     string completo;
     ifstream MyReadFile("dataset.txt");
     int cont = 0;
+    
     while(getline (MyReadFile, myString)){
         if(!cont==0){
             completo = completo + " " + myString;
@@ -28,12 +32,6 @@ void CrearTXT(double* pM, string nameFile){
     }
     MyFileM.close();
 
-}
-
-void Prueba1(int checkpoint){
-    for(int i = 0; i<checkpoint; i++){
-        float y = log(pow(i,5));
-    }
 }
 
 void getPercentage(int check, int total){
@@ -73,8 +71,8 @@ void MD5_times(string data){
     while (checkpoint != (data_lenght + 10000)){
         clock_t time_req = clock();
         
-        // MD5(data[0:checkpoint]);
-        Prueba1(checkpoint);
+        string aux = data.substr(0, checkpoint);
+        // MD5(aux);
         
         time_req = clock() - time_req;
 
@@ -82,6 +80,8 @@ void MD5_times(string data){
         
         //cout << "Execution Time Miliseconds: " << time_req << endl;
         cout << "Execution Time Seconds: " << time << endl;
+        
+        getPercentage(checkpoint, data_lenght);
         
         times[i] = time;
         checkpoint += 10000;
@@ -100,8 +100,8 @@ void SHA_times(string data){
     while (checkpoint != (data_lenght + 10000)){
         clock_t time_req = clock();
         
-        // SHA(data[0:checkpoint]);
-        Prueba1(checkpoint);
+        string aux = data.substr(0, checkpoint);
+        //sha256(aux);
         
         time_req = clock() - time_req;
 
@@ -110,31 +110,27 @@ void SHA_times(string data){
         //cout << "Execution Time Miliseconds: " << time_req << endl;
         //cout << "Execution Time Seconds: " << time << endl;
         
+        getPercentage(checkpoint, data_lenght);
+        
         times[i] = time;
         checkpoint += 10000;
         i++;
 
     }
-    //CrearTXT(times, "SHA_timess.txt");
+
+    CrearTXT(times, "SHA_timess.txt");
 }
 
-
 int main(){
-    //string data = LeerArchivo();
-    string data = "asd";
-    cout << data;
+    string data = LeerArchivo();
 
-    //double* pMD5_times = new double[100];
-    //double* pSHA_times = new double[100];
+    cout << data << endl;
 
-    //pMD5_times = MD5_times(data);
-    MD5_times(data);
+    /*MD5_times(data);
+    SHA_times(data);
 
-    //CrearTXT(pMD5_times, pSHA_times);
-
-    cout << "Done!";
-
-    //cout << *pSHA_times << endl;
+    cout << "" << endl;
+    cout << "Done!" << endl;*/
     
     return 0;
 }
