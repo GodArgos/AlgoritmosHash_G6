@@ -59,6 +59,8 @@ void getPercentage(int check, int total){
             cout << percent << "%" << endl;
         case 100:
             cout << percent << "%" << endl;
+        default:
+            cout << "No se completo el proceso." << endl;
     } 
 }
 
