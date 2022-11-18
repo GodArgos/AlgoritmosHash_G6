@@ -3,6 +3,10 @@
 #include<string>
 #include<ctime>
 #include<cmath>
+
+#include "md5.h"
+#include "sha256.h"
+
 using namespace std;
 
 string LeerArchivo(){
@@ -31,9 +35,13 @@ void CrearTXT(double* pM, string nameFile){
 }
 
 void Prueba1(int checkpoint){
-    for(int i = 0; i<checkpoint; i++){
+
+    string Inp =  LeerArchivo();
+    string M_out = md5(Inp);
+
+    /*for(int i = 0; i<checkpoint; i++){
         float y = log(pow(i,5));
-    }
+    }*/
 }
 
 void getPercentage(int check, int total){
@@ -61,6 +69,8 @@ void getPercentage(int check, int total){
             cout << percent << "%" << endl;
         case 100:
             cout << percent << "%" << endl;
+        default:
+            cout << "No se completo el proceso." << endl;
     } 
 }
 
