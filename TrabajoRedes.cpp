@@ -1,7 +1,7 @@
 #include<iostream>
 #include<fstream>
 #include<string>
-#include<ctime>
+#include<chrono>
 
 #include "md5.h"
 #include "sha256.h"
@@ -51,20 +51,20 @@ void MD5_times(string data){
 
     int i = 0;
     while (checkpoint != (data_lenght + 10000)){
-        clock_t time_req = clock();
+        auto start = chrono::steady_clock::now();
         
         string aux = data.substr(0, checkpoint);
         md5(aux);
         
-        time_req = clock() - time_req;
+        auto end = chrono::steady_clock::now();
 
-        double time = ((double)(time_req)/CLOCKS_PER_SEC);
+        chrono::duration<float, std::milli> duration = end - start;
 
-        cout << "Execution Time Seconds: " << time << endl;
+        cout << "Execution Time Seconds: " << duration.count() << endl;
         
         getPercentage(checkpoint, data_lenght);
         
-        times[i] = time;
+        times[i] = duration.count();
         checkpoint += 10000;
         i++;
     }
@@ -78,27 +78,27 @@ void SHA_times(string data){
     int data_lenght = 1000000;
 
     int i = 0;
+
     while (checkpoint != (data_lenght + 10000)){
-        clock_t time_req = clock();
+        auto start = chrono::steady_clock::now();
         
         string aux = data.substr(0, checkpoint);
-        sha256(aux);
+        md5(aux);
         
-        time_req = clock() - time_req;
+        auto end = chrono::steady_clock::now();
 
-        double time = ((double)(time_req)/CLOCKS_PER_SEC);
-        
-        cout << "Execution SHA256 Time Seconds: " << time << endl;
+        chrono::duration<float, std::milli> duration = end - start;
+
+        cout << "Execution Time Seconds: " << duration.count() << endl;
         
         getPercentage(checkpoint, data_lenght);
         
-        times[i] = time;
+        times[i] = duration.count();
         checkpoint += 10000;
         i++;
-
     }
 
-    CrearTXT(times, "SHA_timess.txt");
+    CrearTXT(times, "SHA_times.txt");
 }
 
 int main(){
