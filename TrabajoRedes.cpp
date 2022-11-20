@@ -5,6 +5,7 @@
 
 #include "md5.h"
 #include "sha256.h"
+#include "project.cpp"
 
 using namespace std;
 
@@ -38,30 +39,9 @@ void getPercentage(int check, int total){
     int quotient = check / total;
     int percent = quotient * 100;
 
-    switch (percent){
-        case 10:
-            cout << percent << "%" << endl;
-        case 20:
-            cout << percent << "%" << endl;
-        case 30:
-            cout << percent << "%" << endl;
-        case 40:
-            cout << percent << "%" << endl;
-        case 50:
-            cout << percent << "%" << endl;
-        case 60:
-            cout << percent << "%" << endl;
-        case 70:
-            cout << percent << "%" << endl;
-        case 80:
-            cout << percent << "%" << endl;
-        case 90:
-            cout << percent << "%" << endl;
-        case 100:
-            cout << percent << "%" << endl;
-        default:
-            cout << "No se completo el proceso." << endl;
-    } 
+    if(percent == 100){
+        cout << "Complete " << percent << "%" << endl;
+    }
 }
 
 void MD5_times(string data){
@@ -74,13 +54,12 @@ void MD5_times(string data){
         clock_t time_req = clock();
         
         string aux = data.substr(0, checkpoint);
-        // MD5(aux);
+        md5(aux);
         
         time_req = clock() - time_req;
 
         double time = ((double)(time_req)/CLOCKS_PER_SEC);
-        
-        //cout << "Execution Time Miliseconds: " << time_req << endl;
+
         cout << "Execution Time Seconds: " << time << endl;
         
         getPercentage(checkpoint, data_lenght);
@@ -103,14 +82,13 @@ void SHA_times(string data){
         clock_t time_req = clock();
         
         string aux = data.substr(0, checkpoint);
-        //sha256(aux);
+        sha256(aux);
         
         time_req = clock() - time_req;
 
         double time = ((double)(time_req)/CLOCKS_PER_SEC);
         
-        //cout << "Execution Time Miliseconds: " << time_req << endl;
-        //cout << "Execution Time Seconds: " << time << endl;
+        cout << "Execution SHA256 Time Seconds: " << time << endl;
         
         getPercentage(checkpoint, data_lenght);
         
@@ -128,11 +106,11 @@ int main(){
 
     cout << data << endl;
 
-    /*MD5_times(data);
+    MD5_times(data);
     SHA_times(data);
 
     cout << "" << endl;
-    cout << "Done!" << endl;*/
+    cout << "Done!" << endl;
     
     return 0;
 }
