@@ -60,7 +60,7 @@ void MD5_times(string data){
 
         chrono::duration<float, std::milli> duration = end - start;
 
-        cout << "Execution Time millieconds: " << duration.count() << endl;
+        cout << "Execution Time milliseconds: " << duration.count() << endl;
         
         getPercentage(checkpoint, data_lenght);
         
@@ -89,7 +89,7 @@ void SHA_times(string data){
 
         chrono::duration<float, std::milli> duration = end - start;
 
-        cout << "Execution Time millieconds: " << duration.count() << endl;
+        cout << "Execution Time milliseconds: " << duration.count() << endl;
         
         getPercentage(checkpoint, data_lenght);
         
