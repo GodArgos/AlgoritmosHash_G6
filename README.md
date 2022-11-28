@@ -8,3 +8,11 @@ Referencia MD5:
 Referencia SHA-256:
   - http://www.zedwood.com/article/cpp-sha256-function
   
+
+Integrantes:
+  - Cristopher Barrenecha
+  - Joaquin Incio
+  - Josemaría Perez
+  
+
+UNIVERSAD DE LIMA
